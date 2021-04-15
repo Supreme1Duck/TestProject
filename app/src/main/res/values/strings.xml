@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TestApplication</string>
+    <string name="create">Создать</string>
+    <string name="document_number">Document number</string>
+    <string name="document_date">Document date</string>
+    <string name="account_number">Account number</string>
+    <string name="summ">Summ</string>
+    <string name="send">Отправить</string>
+</resources>
