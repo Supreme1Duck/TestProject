@@ -1,17 +1,21 @@
-package testapplication.activities
+package testapplication.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.annotation.ColorLong
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import cz.septim.testapplication.R
-import testapplication.viewmodel.MyViewModel
 
-class SecondActivity : AppCompatActivity() {
+class FirstFragment : Fragment(R.layout.second_activity) {
     private lateinit var edDocnum: EditText
     private lateinit var edDate: EditText
     private lateinit var edSumm: EditText
@@ -22,31 +26,32 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var arrayDocNumAdapter : ArrayAdapter<String>
     private lateinit var arrayCurrAdapter : ArrayAdapter<String>
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.second_activity,container, false)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.second_activity)
-        viewModel = MyViewModel()
-        arrayDocNumAdapter = ArrayAdapter(this, R.layout.spinner_item, viewModel.getAccountList())
-        arrayCurrAdapter = ArrayAdapter(this, R.layout.spinner_item, viewModel.getAnalytic().currencyList)
-        createWidgets()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        edDocnum = view.findViewById(R.id.edit_docnum)
+        edDate = view.findViewById(R.id.edit_date)
+        edSumm = view.findViewById(R.id.edit_summ)
+        spinCurrency = view.findViewById(R.id.spin_val)
+        spinCount = view.findViewById(R.id.spin_count)
+        arrayDocNumAdapter = ArrayAdapter(context!!, R.layout.spinner_item, viewModel.getAccountList())
+        arrayCurrAdapter = ArrayAdapter(context!!, R.layout.spinner_item, viewModel.getAnalytic().currencyList)
+        spinCount.adapter = arrayDocNumAdapter
+        spinCurrency.adapter = arrayCurrAdapter
         fillWidgets()
-        fab.setOnClickListener {
-            startActivity(Intent(this, FinalActivity::class.java))
+        fab = view.findViewById(R.id.fab_2)
+        fab.setOnClickListener{
+
         }
     }
 
-    private fun createWidgets(){
-        edDocnum = findViewById(R.id.edit_docnum)
-        edDate = findViewById(R.id.edit_date)
-        edSumm = findViewById(R.id.edit_summ)
-        spinCurrency = findViewById(R.id.spin_val)
-        spinCount = findViewById(R.id.spin_count)
-        spinCount.adapter = arrayDocNumAdapter
-        spinCurrency.adapter = arrayCurrAdapter
-        fab = findViewById(R.id.fab_2)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = MyViewModel()
     }
-
 
     private fun fillWidgets(){
         edDocnum.setText(viewModel.createDocument().docNum.toString(), TextView.BufferType.EDITABLE)

@@ -1,7 +1,7 @@
-package testapplication.viewmodel
+package testapplication.ui
 
 import androidx.lifecycle.ViewModel
-import testapplication.model.DocumentData
+import testapplication.ui.DocumentData
 
 class MyViewModel : ViewModel() {
 

@@ -1,4 +1,4 @@
-package testapplication.model
+package testapplication.ui
 
 object DocumentData {
 

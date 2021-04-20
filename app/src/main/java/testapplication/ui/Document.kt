@@ -1,4 +1,4 @@
-package testapplication.model
+package testapplication.ui
 
 data class Document(
         val docNumber: Long,
