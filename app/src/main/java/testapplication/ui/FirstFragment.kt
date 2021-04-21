@@ -1,6 +1,5 @@
 package testapplication.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,25 +8,22 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.annotation.ColorLong
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import cz.septim.testapplication.R
 
-class FirstFragment : Fragment(R.layout.second_activity) {
+class FirstFragment : Fragment(R.layout.first_fragment) {
     private lateinit var edDocnum: EditText
     private lateinit var edDate: EditText
     private lateinit var edSumm: EditText
     private lateinit var spinCurrency: Spinner
     private lateinit var spinCount: Spinner
-    private lateinit var fab :ExtendedFloatingActionButton
     private lateinit var viewModel : MyViewModel
     private lateinit var arrayDocNumAdapter : ArrayAdapter<String>
     private lateinit var arrayCurrAdapter : ArrayAdapter<String>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.second_activity,container, false)
+        return inflater.inflate(R.layout.first_fragment,container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,10 +38,6 @@ class FirstFragment : Fragment(R.layout.second_activity) {
         spinCount.adapter = arrayDocNumAdapter
         spinCurrency.adapter = arrayCurrAdapter
         fillWidgets()
-        fab = view.findViewById(R.id.fab_2)
-        fab.setOnClickListener{
-
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

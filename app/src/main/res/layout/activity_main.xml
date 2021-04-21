@@ -8,7 +8,7 @@
     android:background="@color/primary_dark_material_dark"
     android:backgroundTint="#FFFFFF"
     android:visibility="visible"
-    tools:context="testapplication.MainActivity"
+    tools:context="testapplication.ui.MainActivity"
     tools:visibility="visible">
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

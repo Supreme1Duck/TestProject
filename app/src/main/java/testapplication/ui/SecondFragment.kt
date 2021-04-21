@@ -1,11 +1,10 @@
 package testapplication.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import cz.septim.testapplication.R
 
-class SecondFragment : Fragment(R.layout.final_activity) {
+class SecondFragment : Fragment(R.layout.second_fragment) {
 
     private lateinit var myArray: Array<String>
 

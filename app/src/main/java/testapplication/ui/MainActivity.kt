@@ -1,4 +1,4 @@
-package testapplication
+package testapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,8 +6,6 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import cz.septim.testapplication.R
-import testapplication.ui.FirstFragment
-import testapplication.ui.SecondFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var buttonCreate : ExtendedFloatingActionButton
