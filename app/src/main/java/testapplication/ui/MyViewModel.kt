@@ -1,19 +1,24 @@
 package testapplication.ui
 
 import androidx.lifecycle.ViewModel
+import testapplication.domain.*
 import testapplication.ui.DocumentData
 
-class MyViewModel : ViewModel() {
+class MyViewModel(
+    private val createDocumentUseCase : ICreateDocumentUseCase,
+    private val getCurrencyCodeUseCase: IGetCurrencyCodeUseCase,
+    private val getAccountListUseCase : IGetAccountListUseCase
+) : ViewModel() {
 
-    fun createDocument(): DocumentData.Documentation {
-       return DocumentData.Documentation(DocumentData.docNum, DocumentData.date)
+    fun createDocument(): BaseDocumentEntity {
+        return createDocumentUseCase.execute()
     }
 
-    fun getAccountList(): List<String> {
-        return DocumentData.accCounts
+    fun getAccountList(): InformationEntity {
+        return getAccountListUseCase.execute()
     }
 
-    fun getAnalytic(): DocumentData.Analytic{
-        return DocumentData.Analytic(listOf(DocumentData.currency[11], DocumentData.currency[22], DocumentData.currency[33]))
+    fun getAnalytic(): List<CurrencyEntity> {
+        return getCurrencyCodeUseCase.execute()
     }
 }
