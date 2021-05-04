@@ -1,11 +1,13 @@
 package testapplication.domain
 
+import io.reactivex.Single
+
 interface Repository {
 
-    fun getAccountList(): List<String>
+    fun getAccountList(): Single<List<String>>
 
-    fun createDocument(): BaseDocumentEntity
+    fun createDocument(): Single<BaseDocumentEntity>
 
-    fun getCurrencyList(): List<String>
+    fun getCurrencyList(): Single<List<String>>
 
 }

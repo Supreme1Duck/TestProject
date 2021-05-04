@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import cz.septim.testapplication.R
 import testapplication.data.mock.RepositoryImpl
 import testapplication.domain.CreateDocumentUseCase
@@ -25,10 +26,6 @@ class FirstFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.first_fragment,container, false)
-    }
-
-    override fun getViewLifecycleOwner(): LifecycleOwner {
-        return super.getViewLifecycleOwner()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,11 +46,11 @@ class FirstFragment : Fragment() {
             spinCurrency.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.currency)
             edDocnum.setText(it.docNumber.toString())
             edDate.setText(it.date)
-            //edSumm.setText(0)
+            edSumm.setText("0")
         }
 
         //spinCount.setOnItemClickListener(){
-         //   viewModel.onAccountsClick()
+        //   viewModel.onAccountsClick()
         //}
     }
 }

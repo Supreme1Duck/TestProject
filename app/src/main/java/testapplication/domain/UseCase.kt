@@ -11,8 +11,8 @@ internal class CreateDocumentUseCase(
     override fun execute(): DocumentEntity {
 
         return DocumentEntity(
-                repository.createDocument().docNumber,
-                repository.createDocument().date,
+                repository.createDocument(),
+                repository.createDocument(),
                 repository.getAccountList(),
                 repository.getCurrencyList(),
                 0
