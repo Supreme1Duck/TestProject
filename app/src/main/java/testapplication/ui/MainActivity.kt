@@ -6,10 +6,6 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import cz.septim.testapplication.R
-import testapplication.domain.CreateDocumentUseCase
-import testapplication.domain.DocumentEntity
-import testapplication.domain.GetAccountListUseCase
-import testapplication.domain.GetCurrencyCodeUseCase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var buttonCreate : ExtendedFloatingActionButton

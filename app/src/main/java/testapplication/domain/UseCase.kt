@@ -1,42 +1,22 @@
 package testapplication.domain
 
 interface ICreateDocumentUseCase {
-    fun execute() : BaseDocumentEntity
-}
-
-interface IGetCurrencyCodeUseCase{
-    fun execute(): List<CurrencyEntity>
-}
-
-interface IGetAccountListUseCase{
-    fun execute(): InformationEntity
+    fun execute(): DocumentEntity
 }
 
 internal class CreateDocumentUseCase(
-        private val createDocument: () -> BaseDocumentEntity
-): ICreateDocumentUseCase{
+        private val repository: Repository
+) : ICreateDocumentUseCase {
 
-    override fun execute() : BaseDocumentEntity{
-        return createDocument.invoke()
-    }
-}
+    override fun execute(): DocumentEntity {
 
-internal class GetCurrencyCodeUseCase(
-        private val getCurrencyList: () -> List<CurrencyEntity>
-): IGetCurrencyCodeUseCase{
-
-    override fun execute() : List<CurrencyEntity> {
-        return getCurrencyList.invoke()
-    }
-}
-
-
-internal class GetAccountListUseCase(
-        private val getAccountList: () -> InformationEntity
-): IGetAccountListUseCase{
-
-    override fun execute() : InformationEntity {
-        return getAccountList.invoke()
+        return DocumentEntity(
+                repository.createDocument().docNumber,
+                repository.createDocument().date,
+                repository.getAccountList(),
+                repository.getCurrencyList(),
+                0
+        )
     }
 }
 

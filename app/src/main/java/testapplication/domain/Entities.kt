@@ -3,14 +3,9 @@ package testapplication.domain
 data class DocumentEntity(
         val docNumber: Long,
         val date: String,
-        val account: String,
-        val currency: String,
-        val currencyCode: Int,
+        val account: List<String>,
+        val currency: List<String>,
         val amount: Int
-)
-
-data class InformationEntity(
-        val docNumber: List<Long>
 )
 
 data class BaseDocumentEntity(
@@ -18,7 +13,7 @@ data class BaseDocumentEntity(
         val date: String
 )
 
-data class CurrencyEntity(
-        val code: Int,
-        val currencyName: String
-)
+// data class CurrencyEntity(
+//        val code: Int,
+//        val currencyName: String
+// )

@@ -8,13 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import cz.septim.testapplication.R
 import testapplication.data.mock.RepositoryImpl
 import testapplication.domain.CreateDocumentUseCase
-import testapplication.domain.GetAccountListUseCase
-import testapplication.domain.GetCurrencyCodeUseCase
 
-class FirstFragment : Fragment(R.layout.first_fragment) {
+class FirstFragment : Fragment() {
     private lateinit var edDocnum: EditText
     private lateinit var edDate: EditText
     private lateinit var edSumm: EditText
@@ -28,6 +27,10 @@ class FirstFragment : Fragment(R.layout.first_fragment) {
         return inflater.inflate(R.layout.first_fragment,container, false)
     }
 
+    override fun getViewLifecycleOwner(): LifecycleOwner {
+        return super.getViewLifecycleOwner()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         edDocnum = view.findViewById(R.id.edit_docnum)
@@ -35,22 +38,22 @@ class FirstFragment : Fragment(R.layout.first_fragment) {
         edSumm = view.findViewById(R.id.edit_summ)
         spinCurrency = view.findViewById(R.id.spin_val)
         spinCount = view.findViewById(R.id.spin_count)
-        viewModel = MyViewModel(CreateDocumentUseCase(createDocument = RepositoryImpl()::createDocument),
-            GetCurrencyCodeUseCase(getCurrencyList = RepositoryImpl()::getCurrencyList),
-            GetAccountListUseCase(getAccountList = RepositoryImpl()::getAccountList)
-        )
-
-        spinCount.adapter = ArrayAdapter(requireContext(), 0, viewModel.getAccountList().docNumber)
-        val arr = viewModel.getAnalytic()
-        spinCurrency.adapter = ArrayAdapter(requireContext(), 0, listOf(arr[0].toString(),
-                arr[1].toString(),
-                arr[2].toString())
-        )
-
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = MyViewModel(CreateDocumentUseCase(repository = RepositoryImpl()))
 
+        viewModel.onAccountsClick().observe(this) {
+            spinCount.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.account)
+            spinCurrency.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.currency)
+            edDocnum.setText(it.docNumber.toString())
+            edDate.setText(it.date)
+            //edSumm.setText(0)
+        }
+
+        //spinCount.setOnItemClickListener(){
+         //   viewModel.onAccountsClick()
+        //}
     }
 }

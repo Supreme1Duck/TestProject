@@ -2,10 +2,10 @@ package testapplication.domain
 
 interface Repository {
 
-    fun getAccountList(): InformationEntity
+    fun getAccountList(): List<String>
 
     fun createDocument(): BaseDocumentEntity
 
-    fun getCurrencyList(): List<CurrencyEntity>
+    fun getCurrencyList(): List<String>
 
 }

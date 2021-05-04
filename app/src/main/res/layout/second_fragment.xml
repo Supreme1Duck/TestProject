@@ -61,7 +61,7 @@
         app:layout_constraintTop_toTopOf="@id/spin_count"/>
 
     <TextView
-        android:id="@+id/edit_summ"
+        android:id="@+id/edit_summ2"
         android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
