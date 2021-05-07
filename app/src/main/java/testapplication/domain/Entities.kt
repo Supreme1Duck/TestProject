@@ -5,7 +5,6 @@ data class DocumentEntity(
         val date: String,
         val account: List<String>,
         val currency: List<String>,
-        val amount: Int
 )
 
 data class BaseDocumentEntity(

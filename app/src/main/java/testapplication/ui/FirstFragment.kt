@@ -41,16 +41,12 @@ class FirstFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = MyViewModel(CreateDocumentUseCase(repository = RepositoryImpl()))
 
-        viewModel.onAccountsClick().observe(this) {
+        viewModel.documentLiveData.observe(this) {
             spinCount.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.account)
             spinCurrency.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.currency)
             edDocnum.setText(it.docNumber.toString())
             edDate.setText(it.date)
             edSumm.setText("0")
         }
-
-        //spinCount.setOnItemClickListener(){
-        //   viewModel.onAccountsClick()
-        //}
     }
 }

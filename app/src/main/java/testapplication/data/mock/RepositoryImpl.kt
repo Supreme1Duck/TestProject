@@ -6,24 +6,21 @@ import testapplication.domain.*
 
 class RepositoryImpl : Repository{
     override fun getAccountList(): Single<List<String>> {
-        return Single.create {
-            it.onSuccess(listOf("1561001903501", "1561001903502", "1561001903503", "1561001903504"))
-            it.onError(Throwable("Error occured in method getAccountList()"))
-        }
+        return Single.just (
+            listOf(
+                "1561001903501",
+                "1561001903502",
+                "1561001903503",
+                "1561001903504"
+            )
+        )
     }
 
-
     override fun createDocument(): Single<BaseDocumentEntity> {
-        return Single.create{
-            it.onSuccess(BaseDocumentEntity(1561001903505, "22.02.2021"))
-            it.onError(Throwable("Error occured in method createDocument()"))
-        }
+        return Single.just(BaseDocumentEntity(1561001903505, "22.02.2021"))
     }
 
     override fun getCurrencyList(): Single<List<String>> {
-        return Single.create{
-            it.onSuccess(listOf("USD 11", "EUR 22", "BYN 33"))
-            it.onError(Throwable("Error occured in method getCurrencyList()"))
-        }
+        return Single.just(listOf("USD 11", "EUR 22", "BYN 33"))
     }
 }

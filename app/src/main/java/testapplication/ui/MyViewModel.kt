@@ -1,17 +1,27 @@
 package testapplication.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.disposables.CompositeDisposable
 import testapplication.domain.*
 
 class MyViewModel(
-   private val document: ICreateDocumentUseCase
+   document: ICreateDocumentUseCase
 ) : ViewModel() {
+    private val _documentLiveData = MutableLiveData<DocumentEntity>()
+    private val disposable = CompositeDisposable()
+    val documentLiveData : LiveData<DocumentEntity> = _documentLiveData
 
-    fun onAccountsClick(): MutableLiveData<DocumentEntity>{
-        _accountsList.value = document.execute()
-        return _accountsList
+    init {
+        disposable.add(
+            document.execute()
+                .subscribe{ doc -> _documentLiveData.value = doc}
+        )
     }
 
-    private val _accountsList = MutableLiveData<DocumentEntity>()
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
+    }
 }
