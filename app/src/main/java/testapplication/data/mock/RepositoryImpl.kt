@@ -1,10 +1,10 @@
 package testapplication.data.mock
 
 import io.reactivex.Single
-import io.reactivex.SingleOnSubscribe
 import testapplication.domain.*
 
 class RepositoryImpl : Repository{
+
     override fun getAccountList(): Single<List<String>> {
         return Single.just (
             listOf(

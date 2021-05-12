@@ -21,8 +21,6 @@ class FirstFragment : Fragment() {
     private lateinit var spinCurrency: Spinner
     private lateinit var spinCount: Spinner
     private lateinit var viewModel : MyViewModel
-    private lateinit var arrayDocNumAdapter : ArrayAdapter<String>
-    private lateinit var arrayCurrAdapter : ArrayAdapter<String>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.first_fragment,container, false)
@@ -40,7 +38,6 @@ class FirstFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = MyViewModel(CreateDocumentUseCase(repository = RepositoryImpl()))
-
         viewModel.documentLiveData.observe(this) {
             spinCount.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.account)
             spinCurrency.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.currency)

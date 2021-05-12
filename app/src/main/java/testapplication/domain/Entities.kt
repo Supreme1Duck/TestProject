@@ -11,8 +11,3 @@ data class BaseDocumentEntity(
         val docNumber: Long,
         val date: String
 )
-
-// data class CurrencyEntity(
-//        val code: Int,
-//        val currencyName: String
-// )
