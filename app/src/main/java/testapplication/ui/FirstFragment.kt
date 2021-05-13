@@ -10,9 +10,6 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import cz.septim.testapplication.R
 import org.koin.android.viewmodel.ext.android.viewModel
-import testapplication.data.mock.RepositoryImpl
-import testapplication.domain.CreateDocumentUseCase
-import testapplication.domain.GetAdditionalInfo
 
 class FirstFragment : Fragment() {
     private lateinit var edDocnum: EditText
