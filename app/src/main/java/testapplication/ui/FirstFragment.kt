@@ -8,16 +8,18 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import cz.septim.testapplication.R
 import testapplication.data.mock.RepositoryImpl
 import testapplication.domain.CreateDocumentUseCase
+import testapplication.domain.GetAdditionalInfo
 
 class FirstFragment : Fragment() {
     private lateinit var edDocnum: EditText
     private lateinit var edDate: EditText
     private lateinit var edSumm: EditText
+    private lateinit var edInfo: EditText
+    private lateinit var edCount: EditText
     private lateinit var spinCurrency: Spinner
     private lateinit var spinCount: Spinner
     private lateinit var viewModel : MyViewModel
@@ -31,13 +33,16 @@ class FirstFragment : Fragment() {
         edDocnum = view.findViewById(R.id.edit_docnum)
         edDate = view.findViewById(R.id.edit_date)
         edSumm = view.findViewById(R.id.edit_summ)
+        edInfo = view.findViewById(R.id.edit_info)
+        edCount = view.findViewById(R.id.edit_count)
         spinCurrency = view.findViewById(R.id.spin_val)
         spinCount = view.findViewById(R.id.spin_count)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = MyViewModel(CreateDocumentUseCase(repository = RepositoryImpl()))
+        viewModel = MyViewModel(CreateDocumentUseCase(repositoryGeneralData = RepositoryImpl()),
+            GetAdditionalInfo(repositoryAdditionalData = RepositoryImpl()))
         viewModel.documentLiveData.observe(this) {
             spinCount.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.account)
             spinCurrency.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, it.currency)
@@ -45,5 +50,9 @@ class FirstFragment : Fragment() {
             edDate.setText(it.date)
             edSumm.setText("0")
         }
+        viewModel.infoLiveData.observe(this, {
+            edCount.setText(it.count.toString())
+            edInfo.setText(it.info)
+        })
     }
 }

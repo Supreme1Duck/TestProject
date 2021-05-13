@@ -2,7 +2,7 @@ package testapplication.domain
 
 import io.reactivex.Single
 
-interface Repository {
+interface RepositoryGeneralData {
 
     fun getAccountList(): Single<List<String>>
 

@@ -3,7 +3,7 @@ package testapplication.data.mock
 import io.reactivex.Single
 import testapplication.domain.*
 
-class RepositoryImpl : Repository{
+class RepositoryImpl : RepositoryGeneralData, RepositoryAdditionalData{
 
     override fun getAccountList(): Single<List<String>> {
         return Single.just (
@@ -22,5 +22,13 @@ class RepositoryImpl : Repository{
 
     override fun getCurrencyList(): Single<List<String>> {
         return Single.just(listOf("USD 11", "EUR 22", "BYN 33"))
+    }
+
+    override fun getInfo(): Single<String> {
+        return Single.just("RETURNMENT")
+    }
+
+    override fun getCount(): Single<Int> {
+        return Single.just(1)
     }
 }
