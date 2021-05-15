@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ class FirstFragment : Fragment() {
     private lateinit var edCount: EditText
     private lateinit var spinCurrency: Spinner
     private lateinit var spinCount: Spinner
+    private lateinit var buttonTap: Button
     private val myViewModel : MyViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,6 +36,8 @@ class FirstFragment : Fragment() {
         edCount = view.findViewById(R.id.edit_count)
         spinCurrency = view.findViewById(R.id.spin_val)
         spinCount = view.findViewById(R.id.spin_count)
+        buttonTap = view.findViewById(R.id.button_tap)
+        onButtonTapClickListener()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,5 +53,12 @@ class FirstFragment : Fragment() {
             edCount.setText(it.count.toString())
             edInfo.setText(it.info)
         })
+    }
+
+    fun onButtonTapClickListener(){
+        buttonTap.setOnClickListener {
+            myViewModel.plusOneToSum(myViewModel.infoLiveData.value!!.info,
+                myViewModel.infoLiveData.value!!.count)
+        }
     }
 }

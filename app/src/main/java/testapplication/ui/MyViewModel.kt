@@ -37,6 +37,10 @@ class MyViewModel(
         )
     }
 
+    fun plusOneToSum(info: String, count: Int){
+        _infoLiveData.value = AdditionalInfoData(info, count + 1)
+    }
+
     override fun onCleared() {
         super.onCleared()
         disposable.clear()

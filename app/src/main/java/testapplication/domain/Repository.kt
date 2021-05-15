@@ -1,0 +1,3 @@
+package testapplication.domain
+
+interface Repository : RepositoryAdditionalData, RepositoryGeneralData

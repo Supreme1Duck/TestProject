@@ -9,5 +9,4 @@ interface RepositoryGeneralData {
     fun createDocument(): Single<BaseDocumentEntity>
 
     fun getCurrencyList(): Single<List<String>>
-
 }

@@ -3,7 +3,7 @@ package testapplication.data.mock
 import io.reactivex.Single
 import testapplication.domain.*
 
-class RepositoryImpl : RepositoryGeneralData, RepositoryAdditionalData{
+class RepositoryImpl : Repository{
 
     override fun getAccountList(): Single<List<String>> {
         return Single.just (
